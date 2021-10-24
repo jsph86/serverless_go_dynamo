@@ -197,7 +197,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/devices-api/dev/1635018805874-2021-10-23T19:53:25.874Z/insertDevices.zip"
+                "S3Key": "serverless/devices-api/dev/1635083734152-2021-10-24T13:55:34.152Z/insertDevices.zip"
               },
               "Handler": "bin/InsertDevice",
               "Runtime": "go1.x",
@@ -222,7 +222,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/devices-api/dev/1635018805874-2021-10-23T19:53:25.874Z/getDevices.zip"
+                "S3Key": "serverless/devices-api/dev/1635083734152-2021-10-24T13:55:34.152Z/getDevices.zip"
               },
               "Handler": "bin/GetDevice",
               "Runtime": "go1.x",
@@ -240,24 +240,24 @@
               "GetDevicesLogGroup"
             ]
           },
-          "GetDevicesLambdaVersionHNvF2gqN4b9TDTQZcHACigZuUAIohum7GFQc8uxZy0": {
-            "Type": "AWS::Lambda::Version",
-            "DeletionPolicy": "Retain",
-            "Properties": {
-              "FunctionName": {
-                "Ref": "GetDevicesLambdaFunction"
-              },
-              "CodeSha256": "CpnonFcclA+Qd3ZzNCt7fFRn5LE4w0Mf7qPefgzPz18="
-            }
-          },
-          "InsertDevicesLambdaVersionXoxO5nwiBNZMJDAMGgPsKWU1yPpZZUKSU2fmRvLl8ro": {
+          "InsertDevicesLambdaVersionIk1INw24mi8MyumEjm301119K6Iq4rJiDov2V2VMAU": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "InsertDevicesLambdaFunction"
               },
-              "CodeSha256": "CpnonFcclA+Qd3ZzNCt7fFRn5LE4w0Mf7qPefgzPz18="
+              "CodeSha256": "nSe2Aa90IBlwYdxZYN+uc5hkYcJfIIJSF74HHb2mnBk="
+            }
+          },
+          "GetDevicesLambdaVersionj189UuCexgoRp0IvGZ4n5b8dKZfCDaA7SuvwQuoik": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "GetDevicesLambdaFunction"
+              },
+              "CodeSha256": "nSe2Aa90IBlwYdxZYN+uc5hkYcJfIIJSF74HHb2mnBk="
             }
           },
           "ApiGatewayRestApi": {
@@ -509,7 +509,7 @@
               "Name": "devices-api-dev | Validate request body and querystring parameters"
             }
           },
-          "ApiGatewayDeployment1635018802780": {
+          "ApiGatewayDeployment1635083731611": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -608,22 +608,22 @@
               "Name": "sls-devices-api-dev-ServerlessDeploymentBucketName"
             }
           },
-          "GetDevicesLambdaFunctionQualifiedArn": {
-            "Description": "Current Lambda function version",
-            "Value": {
-              "Ref": "GetDevicesLambdaVersionHNvF2gqN4b9TDTQZcHACigZuUAIohum7GFQc8uxZy0"
-            },
-            "Export": {
-              "Name": "sls-devices-api-dev-GetDevicesLambdaFunctionQualifiedArn"
-            }
-          },
           "InsertDevicesLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "InsertDevicesLambdaVersionXoxO5nwiBNZMJDAMGgPsKWU1yPpZZUKSU2fmRvLl8ro"
+              "Ref": "InsertDevicesLambdaVersionIk1INw24mi8MyumEjm301119K6Iq4rJiDov2V2VMAU"
             },
             "Export": {
               "Name": "sls-devices-api-dev-InsertDevicesLambdaFunctionQualifiedArn"
+            }
+          },
+          "GetDevicesLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "GetDevicesLambdaVersionj189UuCexgoRp0IvGZ4n5b8dKZfCDaA7SuvwQuoik"
+            },
+            "Export": {
+              "Name": "sls-devices-api-dev-GetDevicesLambdaFunctionQualifiedArn"
             }
           },
           "ServiceEndpoint": {
@@ -778,7 +778,7 @@
         "timeout": 6,
         "runtime": "go1.x",
         "vpc": {},
-        "versionLogicalId": "InsertDevicesLambdaVersionXoxO5nwiBNZMJDAMGgPsKWU1yPpZZUKSU2fmRvLl8ro"
+        "versionLogicalId": "InsertDevicesLambdaVersionIk1INw24mi8MyumEjm301119K6Iq4rJiDov2V2VMAU"
       },
       "getDevices": {
         "handler": "bin/GetDevice",
@@ -823,7 +823,7 @@
         "timeout": 6,
         "runtime": "go1.x",
         "vpc": {},
-        "versionLogicalId": "GetDevicesLambdaVersionHNvF2gqN4b9TDTQZcHACigZuUAIohum7GFQc8uxZy0"
+        "versionLogicalId": "GetDevicesLambdaVersionj189UuCexgoRp0IvGZ4n5b8dKZfCDaA7SuvwQuoik"
       }
     },
     "configValidationMode": "warn",
@@ -834,27 +834,6 @@
         "$ref": "$[\"service\"][\"serviceObject\"]"
       },
       "frameworkVersion": "2",
-      "iamRoleStatements": [
-        {
-          "Effect": "Allow",
-          "Action": [
-            "dynamodb:DescribeTable",
-            "dynamodb:Query",
-            "dynamodb:Scan",
-            "dynamodb:GetItem",
-            "dynamodb:PutItem",
-            "dynamodb:UpdateItem",
-            "dynamodb:DeleteItem"
-          ],
-          "Resource": [
-            {
-              "Fn::GetAtt": [
-                "devices"
-              ]
-            }
-          ]
-        }
-      ],
       "provider": {
         "$ref": "$[\"service\"][\"provider\"]"
       },
@@ -870,7 +849,7 @@
         "exclude": [
           "./**"
         ],
-        "artifactDirectoryName": "serverless/devices-api/dev/1635018805874-2021-10-23T19:53:25.874Z"
+        "artifactDirectoryName": "serverless/devices-api/dev/1635083734152-2021-10-24T13:55:34.152Z"
       },
       "functions": {
         "$ref": "$[\"service\"][\"functions\"]"
@@ -919,7 +898,7 @@
   },
   "package": {
     "individually": true,
-    "artifactDirectoryName": "serverless/devices-api/dev/1635018805874-2021-10-23T19:53:25.874Z",
+    "artifactDirectoryName": "serverless/devices-api/dev/1635083734152-2021-10-24T13:55:34.152Z",
     "artifact": ""
   }
 }
