@@ -197,7 +197,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/devices-api/dev/1635083734152-2021-10-24T13:55:34.152Z/insertDevices.zip"
+                "S3Key": "serverless/devices-api/dev/1635084788718-2021-10-24T14:13:08.718Z/insertDevices.zip"
               },
               "Handler": "bin/InsertDevice",
               "Runtime": "go1.x",
@@ -222,7 +222,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/devices-api/dev/1635083734152-2021-10-24T13:55:34.152Z/getDevices.zip"
+                "S3Key": "serverless/devices-api/dev/1635084788718-2021-10-24T14:13:08.718Z/getDevices.zip"
               },
               "Handler": "bin/GetDevice",
               "Runtime": "go1.x",
@@ -240,24 +240,24 @@
               "GetDevicesLogGroup"
             ]
           },
-          "InsertDevicesLambdaVersionIk1INw24mi8MyumEjm301119K6Iq4rJiDov2V2VMAU": {
+          "InsertDevicesLambdaVersionhAG4kbP43Fgvl4JtslkA0JEicL17ieS8AYf0z1wZcM": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "InsertDevicesLambdaFunction"
               },
-              "CodeSha256": "nSe2Aa90IBlwYdxZYN+uc5hkYcJfIIJSF74HHb2mnBk="
+              "CodeSha256": "c3JfKRJCcT54fu7meIhQE/rqukWQSELVHUdaLznklTU="
             }
           },
-          "GetDevicesLambdaVersionj189UuCexgoRp0IvGZ4n5b8dKZfCDaA7SuvwQuoik": {
+          "GetDevicesLambdaVersionTelSyUwcZWRz4Cskf8SKZML3OAzehjtoIoxMQ4G08gQ": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "GetDevicesLambdaFunction"
               },
-              "CodeSha256": "nSe2Aa90IBlwYdxZYN+uc5hkYcJfIIJSF74HHb2mnBk="
+              "CodeSha256": "c3JfKRJCcT54fu7meIhQE/rqukWQSELVHUdaLznklTU="
             }
           },
           "ApiGatewayRestApi": {
@@ -509,7 +509,7 @@
               "Name": "devices-api-dev | Validate request body and querystring parameters"
             }
           },
-          "ApiGatewayDeployment1635083731611": {
+          "ApiGatewayDeployment1635084786417": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -611,7 +611,7 @@
           "InsertDevicesLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "InsertDevicesLambdaVersionIk1INw24mi8MyumEjm301119K6Iq4rJiDov2V2VMAU"
+              "Ref": "InsertDevicesLambdaVersionhAG4kbP43Fgvl4JtslkA0JEicL17ieS8AYf0z1wZcM"
             },
             "Export": {
               "Name": "sls-devices-api-dev-InsertDevicesLambdaFunctionQualifiedArn"
@@ -620,7 +620,7 @@
           "GetDevicesLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "GetDevicesLambdaVersionj189UuCexgoRp0IvGZ4n5b8dKZfCDaA7SuvwQuoik"
+              "Ref": "GetDevicesLambdaVersionTelSyUwcZWRz4Cskf8SKZML3OAzehjtoIoxMQ4G08gQ"
             },
             "Export": {
               "Name": "sls-devices-api-dev-GetDevicesLambdaFunctionQualifiedArn"
@@ -778,7 +778,7 @@
         "timeout": 6,
         "runtime": "go1.x",
         "vpc": {},
-        "versionLogicalId": "InsertDevicesLambdaVersionIk1INw24mi8MyumEjm301119K6Iq4rJiDov2V2VMAU"
+        "versionLogicalId": "InsertDevicesLambdaVersionhAG4kbP43Fgvl4JtslkA0JEicL17ieS8AYf0z1wZcM"
       },
       "getDevices": {
         "handler": "bin/GetDevice",
@@ -823,7 +823,7 @@
         "timeout": 6,
         "runtime": "go1.x",
         "vpc": {},
-        "versionLogicalId": "GetDevicesLambdaVersionj189UuCexgoRp0IvGZ4n5b8dKZfCDaA7SuvwQuoik"
+        "versionLogicalId": "GetDevicesLambdaVersionTelSyUwcZWRz4Cskf8SKZML3OAzehjtoIoxMQ4G08gQ"
       }
     },
     "configValidationMode": "warn",
@@ -849,7 +849,7 @@
         "exclude": [
           "./**"
         ],
-        "artifactDirectoryName": "serverless/devices-api/dev/1635083734152-2021-10-24T13:55:34.152Z"
+        "artifactDirectoryName": "serverless/devices-api/dev/1635084788718-2021-10-24T14:13:08.718Z"
       },
       "functions": {
         "$ref": "$[\"service\"][\"functions\"]"
@@ -898,7 +898,7 @@
   },
   "package": {
     "individually": true,
-    "artifactDirectoryName": "serverless/devices-api/dev/1635083734152-2021-10-24T13:55:34.152Z",
+    "artifactDirectoryName": "serverless/devices-api/dev/1635084788718-2021-10-24T14:13:08.718Z",
     "artifact": ""
   }
 }

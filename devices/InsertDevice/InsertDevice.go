@@ -14,12 +14,10 @@ import (
 )
 
 type Response events.APIGatewayProxyResponse
-
 type deps struct {
 	ddb   dynamodbiface.DynamoDBAPI
 	table string
 }
-
 type Device struct {
 	Id          string `json:"id"`
 	DeviceModel string `json:"deviceModel"`
@@ -27,15 +25,23 @@ type Device struct {
 	Note        string `json:"note"`
 	Serial      string `json:"serial"`
 }
-
 type ResponseObject struct {
 	ResponseCode    int
 	ResponseContent string
 }
 
-// Handler is our lambda handler invoked by the `lambda.Start` function call
+func ResponseToGateway(response ResponseObject, errorToThrow error) (Response, error) {
+	return Response{
+		StatusCode:      response.ResponseCode,
+		IsBase64Encoded: false,
+		Body:            response.ResponseContent,
+		Headers: map[string]string{
+			"Content-Type": "application/json",
+		},
+	}, errorToThrow
+}
+
 func (d *deps) Handler(req events.APIGatewayProxyRequest) (Response, error) {
-	//	var buf bytes.Buffer
 
 	responseObject := ResponseObject{0, ""}
 
@@ -46,21 +52,11 @@ func (d *deps) Handler(req events.APIGatewayProxyRequest) (Response, error) {
 		var newDevice Device
 
 		//Convert Delivered Object Via ApiGateway to Device Object
-		erro := json.Unmarshal([]byte(req.Body), &newDevice)
+		errorWhileCOnverting := json.Unmarshal([]byte(req.Body), &newDevice)
 
-		if erro != nil || newDevice.Id == "" {
-
-			// Return 400 Id is not available
-			//	errorToThrow = errors.New("required Fields is not available")
+		if errorWhileCOnverting != nil || newDevice.Id == "" {
 			responseObject = ResponseObject{500, "required Fields is not available"}
-			return Response{
-				StatusCode:      responseObject.ResponseCode,
-				IsBase64Encoded: false,
-				Body:            responseObject.ResponseContent,
-				Headers: map[string]string{
-					"Content-Type": "application/json",
-				},
-			}, errorToThrow
+			return ResponseToGateway(responseObject, errorToThrow)
 		}
 
 		// Convert Device Object to Valid Dynamodb Object
@@ -68,17 +64,8 @@ func (d *deps) Handler(req events.APIGatewayProxyRequest) (Response, error) {
 
 		if err != nil {
 			log.Fatalf("Got Error Creating Object For Saving : %s", err)
-			// Return 400 Id is not available
-			//	errorToThrow = errors.New("Bad Request")
 			responseObject = ResponseObject{400, "Bad Request"}
-			return Response{
-				StatusCode:      responseObject.ResponseCode,
-				IsBase64Encoded: false,
-				Body:            responseObject.ResponseContent,
-				Headers: map[string]string{
-					"Content-Type": "application/json",
-				},
-			}, errorToThrow
+			return ResponseToGateway(responseObject, errorToThrow)
 		}
 
 		tableName := d.table
@@ -93,43 +80,17 @@ func (d *deps) Handler(req events.APIGatewayProxyRequest) (Response, error) {
 		if err != nil {
 			log.Fatalf("Got error calling PutItem: %s", err)
 
-			// Return 500 Internal Server Error
-			//	errorToThrow = errors.New("Bad Request")
 			responseObject = ResponseObject{400, "Bad Request"}
-			return Response{
-				StatusCode:      responseObject.ResponseCode,
-				IsBase64Encoded: false,
-				Body:            responseObject.ResponseContent,
-				Headers: map[string]string{
-					"Content-Type": "application/json",
-				},
-			}, errorToThrow
+			return ResponseToGateway(responseObject, errorToThrow)
 
 		} else {
-			// Return 500 Internal Server Error
 			responseObject = ResponseObject{201, "Created."}
-			return Response{
-				StatusCode:      responseObject.ResponseCode,
-				IsBase64Encoded: false,
-				Body:            responseObject.ResponseContent,
-				Headers: map[string]string{
-					"Content-Type": "application/json",
-				},
-			}, errorToThrow
+			return ResponseToGateway(responseObject, errorToThrow)
 		}
 
 	} else {
-		// Return 400 Id is not available
-		//	errorToThrow = errors.New("bad Request")
 		responseObject = ResponseObject{400, "Bad Request"}
-		return Response{
-			StatusCode:      responseObject.ResponseCode,
-			IsBase64Encoded: false,
-			Body:            responseObject.ResponseContent,
-			Headers: map[string]string{
-				"Content-Type": "application/json",
-			},
-		}, errorToThrow
+		return ResponseToGateway(responseObject, errorToThrow)
 	}
 
 }
